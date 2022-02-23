@@ -4,9 +4,10 @@ public abstract class Conta implements IConta {
 	private static final int AGENCIA_PADRAO = 1;
 	private static int SEQUENCIAL = 1;
 
+	protected Banco banco;
 	protected int agencia;
 	protected int numero;
-	protected double saldo;
+	protected double saldo = 0.0;
 	protected Cliente cliente;
 
 	public Conta(Cliente cliente) {
@@ -17,19 +18,35 @@ public abstract class Conta implements IConta {
 
 	@Override
 	public void sacar(double valor) {
+			
+				
 		saldo -= valor;
+		
+		//System.out.println("Operação realizada com sucesso" ); 
 	}
 
 	@Override
 	public void depositar(double valor) {
+					
+		
 		saldo += valor;
+		
+		//System.out.println("Operação realizada com sucesso" );
+		
 	}
 
 	@Override
-	public void transferir(double valor, IConta contaDestino) {
+	public void transferir(double valor, Conta contaDestino) {
+		
+				
 		this.sacar(valor);
 		contaDestino.depositar(valor);
+		
+		
 	}
+	
+	
+	
 
 	public int getAgencia() {
 		return agencia;
